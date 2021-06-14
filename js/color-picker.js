@@ -11,9 +11,6 @@ const max = colorList.length - 1;
 const COLOR_CHANGE_DELAY = 2000;
 let intervalId;
 
-
-
-
 const randomIntegerFromInterval = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
@@ -22,17 +19,17 @@ const onStartButtonClick = () =>{
   intervalId = setInterval(() => {
       refs.bodyStyle.style.backgroundColor = colorList[randomIntegerFromInterval(min, max)];
   }, COLOR_CHANGE_DELAY);
-  refs.stopButton.addEventListener('click', onStopButtonClick);
-  refs.startButton.removeEventListener('click', onStartButtonClick);
+  
+  refs.startButton.setAttribute("disabled",true);
+  
 };
+
 const onStopButtonClick = () => {
-  clearInterval(intervalId);
-  refs.startButton.addEventListener('click', onStartButtonClick);
-  refs.stopButton.removeEventListener('click', onStopButtonClick);
+  clearInterval(intervalId);   
+  
+  refs.startButton.removeAttribute("disabled");
+   
 };
-
- refs.startButton.addEventListener('click', onStartButtonClick);
- 
-
-
-
+  
+refs.startButton.addEventListener('click', onStartButtonClick);
+refs.stopButton.addEventListener('click', onStopButtonClick);
